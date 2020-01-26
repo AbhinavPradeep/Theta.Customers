@@ -8,14 +8,15 @@ namespace Theta.Customers.Repository
 {
     public class CustomerRepos
     {
-        public CustomerRepos()
+        private string ConnectionString { get; set; }
+        public CustomerRepos(string ConnectionString)
         {
-
+            this.ConnectionString = ConnectionString;
         }
 
         private IMongoCollection<Customer> Initialize()
         {
-            var client = new MongoClient("yourconnection string");
+            var client = new MongoClient(ConnectionString);
             var database = client.GetDatabase("CustomersDB");
             var collection = database.GetCollection<Customer>("Customers");
             return collection;
